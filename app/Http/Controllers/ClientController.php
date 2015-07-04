@@ -61,7 +61,7 @@ class ClientController extends Controller {
         Session::flash('flash_message', 'Client successfully added! Need to add the Address');
         Session::put('addressMessage', 'New Address for Tenant');
 
-        return redirect('general.address/create');
+        return redirect('address/create');
     }
 
     /**

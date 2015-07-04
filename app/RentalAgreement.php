@@ -11,7 +11,7 @@ class RentalAgreement extends Model {
      * @var array
      */
 
-    protected $fillable = ['dateOfAgreement','commencingDate','expireDate'
+    protected $fillable = ['client_id','owner_id','property_id', 'user_id','dateOfAgreement','commencingDate','expireDate'
         ,'rentalAmount','rentalDeposit','utilitiesDeposit'
         ,'otherDeposit','premiseUse'];
 

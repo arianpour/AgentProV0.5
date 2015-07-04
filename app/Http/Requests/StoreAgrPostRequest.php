@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class StoreAgreementPostRequest extends Request {
+class StoreAgrPostRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class StoreAgreementPostRequest extends Request {
         //TODO: not able to add rules for validation
 		return [
 
+            'dateOfAgreement'=>'required|max:1',
 		];
 	}
 

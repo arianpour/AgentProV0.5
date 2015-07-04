@@ -17,7 +17,7 @@ class Property extends Model {
     public function addresses(){
         return $this->morphOne('App\Address','addressable');
     }
-    public function renalAgreement(){
+    public function rental_agreement(){
         return $this->hasMany('App\RentalAgreement');
     }
 

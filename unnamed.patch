@@ -1,0 +1,736 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
++++ .idea/misc.xml	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" />
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ .idea/vcs.xml	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+-    <mapping directory="" vcs="" />
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/Http/Controllers/AddressController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/AddressController.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/Controllers/AddressController.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -29,7 +29,7 @@
+      */
+     public function create()
+     {
+-        return view('addAddress');
++        return view('general.addAddress');
+     }
+ 
+     /**
+@@ -97,7 +97,7 @@
+ 
+         $addressId=$client->addresses()->first()->id;
+         $address=Address::findOrFail($addressId);
+-        return view('editAddress',compact('address','client'));
++        return view('general.editAddress',compact('address','client'));
+     }
+ 
+     /**
+Index: app/Http/Controllers/BankDetailController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/BankDetailController.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/Controllers/BankDetailController.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -28,7 +28,7 @@
+      */
+     public function create()
+     {
+-        return view('addBankDetail');	}
++        return view('general.addBankDetail');	}
+ 
+     /**
+      * Store a newly created resource in storage.
+@@ -75,7 +75,7 @@
+ 
+         $bankDetailId=$client->bankdetails()->first()->id;
+         $bankDetail=BankDetail::findOrFail($bankDetailId);
+-        return view('editBankDetail',compact('bankDetail','client'));
++        return view('general.editBankDetail',compact('bankDetail','client'));
+     }
+ 
+     /**
+Index: app/Http/Controllers/ClientController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/ClientController.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/Controllers/ClientController.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -22,7 +22,7 @@
+ 
+         $clientList=User::findOrFail(Auth::user()->id)->client->where('role','tenant');
+ 
+-        return view('clients',compact('clientList'));
++        return view('client.clients',compact('clientList'));
+     }
+ 
+     /**
+@@ -33,7 +33,7 @@
+     public function create()
+     {
+ 
+-        return view('addClient');
++        return view('client.addClient');
+     }
+ 
+     /**
+@@ -61,7 +61,7 @@
+         Session::flash('flash_message', 'Client successfully added! Need to add the Address');
+         Session::put('addressMessage', 'New Address for Tenant');
+ 
+-        return redirect('address/create');
++        return redirect('general.address/create');
+     }
+ 
+     /**
+@@ -75,7 +75,7 @@
+ 
+         $client=Client::find($id);
+         $address=$client->addresses()->get();
+-        return view('showClient',compact('client','address'));
++        return view('client.showClient',compact('client','address'));
+     }
+ 
+     /**
+@@ -87,7 +87,7 @@
+     public function edit($id)
+     {
+         $client=Client::findOrFail($id);
+-        return view('editClient',compact('client'));
++        return view('client.editClient',compact('client'));
+ 
+     }
+ 
+Index: app/Http/Controllers/OwnerController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/OwnerController.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/Controllers/OwnerController.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -20,7 +20,7 @@
+     {
+         //TODO: change it to show the owner lists
+         $clientList=User::findOrFail(Auth::user()->id)->client->where('role','owner');
+-        return view('owners',compact('clientList'));
++        return view('owner.owners',compact('clientList'));
+     }
+ 
+     /**
+@@ -30,7 +30,7 @@
+      */
+     public function create()
+     {
+-        return view('addOwner');
++        return view('owner.addOwner');
+     }
+ 
+     /**
+@@ -78,7 +78,7 @@
+ 
+ 
+ 
+-        return view('showOwner',compact('owner','address','bankDetails','property'));
++        return view('owner.showOwner',compact('owner','address','bankDetails','property'));
+     }
+ 
+     /**
+@@ -90,7 +90,7 @@
+     public function edit($id)
+     {
+         $owner=Client::findOrFail($id);
+-        return view('editOwner',compact('owner'));
++        return view('owner.editOwner',compact('owner'));
+     }
+ 
+     /**
+Index: app/Http/Controllers/PropertyController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/PropertyController.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/Controllers/PropertyController.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -18,7 +18,7 @@
+     {
+         $propertyList=User::findOrFail(Auth::user()->id)->property;
+ 
+-        return view('property',compact('propertyList'));
++        return view('property.property',compact('propertyList'));
+     }
+ 
+     /**
+@@ -30,7 +30,7 @@
+     {
+         $ownerList=User::findOrFail(Auth::user()->id)->client->where('role','owner');
+ 
+-        return view('addProperty',compact('ownerList'));
++        return view('property.addProperty',compact('ownerList'));
+     }
+ 
+     /**
+@@ -78,7 +78,7 @@
+         $address=Address::findOrFail($id);
+         // $address=Address::findOrFail($address->id);
+ 
+-        return view('editProperty',compact('address'));
++        return view('property.editProperty',compact('address'));
+     }
+ 
+     /**
+Index: app/Http/Controllers/RentalAgreementController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/RentalAgreementController.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/Controllers/RentalAgreementController.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,9 +1,17 @@
+ <?php namespace App\Http\Controllers;
+ 
++use App\Client;
+ use App\Http\Requests;
+ use App\Http\Controllers\Controller;
++use App\Http\Requests\StoreAgreementPostRequest;
++use App\RentalAgreement;
++use Illuminate\Support\Facades\Input;
++use Session;
+ 
++use App\Http\Requests\StorePreAgreementPostRequest;
++use App\User;
+ use Illuminate\Http\Request;
++use Illuminate\Support\Facades\Auth;
+ 
+ class RentalAgreementController extends Controller {
+ 
+@@ -14,7 +22,9 @@
+ 	 */
+ 	public function index()
+ 	{
+-		//
++        $agreementList=User::findOrFail(Auth::user()->id)->rentalAgreement;
++
++        return view('agreement.agreement',compact('agreementList'));
+ 	}
+ 
+ 	/**
+@@ -22,19 +32,65 @@
+ 	 *
+ 	 * @return Response
+ 	 */
+-	public function create()
++	public function preCreate()
+ 	{
+-		//
++        $clientList=User::findOrFail(Auth::user()->id)->client->where('role','tenant')->lists('name','id');
++        $ownerList=User::findOrFail(Auth::user()->id)->client->where('role','owner')->lists('name','id');
++
++
++        return view('agreement.addpreAgreement',compact('clientList','ownerList'));
++
+ 	}
+ 
+-	/**
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @param StorePreAgreementPostRequest $request
++     * @return Response
++     */
++    public function create(){
++
++        Session::put('client_id', Input::get('tenant'));
++        Session::put('owner_id', Input::get('owner'));
++
++        $propertyList=Client::findOrFail(Input::get('owner'))->property()->get();
++        $adds=array();
++        foreach($propertyList as $property){
++            array_push($adds,$property->addresses()->get()->lists('unit_street','id'));
++        }
++        return view('agreement.addAgreement',compact('adds'));
++    }
++
++    /**
+-	 * Store a newly created resource in storage.
+-	 *
++     * Store a newly created resource in storage.
++     *
++     * @param StoreAgreementPostRequest $request
+-	 * @return Response
+-	 */
++     * @return Response
++     */
+-	public function store()
++	public function store(StoreAgreementPostRequest $request)
+ 	{
+-		//
++        //TODO: need to review the id's not working
++        $agreement= new RentalAgreement(array(
++
++            'client_id'         =>  Session::get('client_id'),
++            'owner_id'          =>  Session::get('owner_id'),
++            'property_id'       =>  $request->property_id,
++            'user_id'           =>  Auth::user()->id,
++            'dateOfAgreement'   =>  $request->dateOfAgreement,
++            'commencingDate'    =>  $request->commencingDate,
++            'expireDate'        =>  $request->expireDate,
++            'rentalAmount'      =>  $request->rentalAmount,
++            'rentalDeposit'     =>  $request->rentalDeposit,
++            'utilitiesDeposit'  =>  $request->utilitiesDeposit,
++            'otherDeposit'      =>  $request->otherDeposit,
++            'premiseUse'        =>  $request->premiseUse
++        ));
++
++
++        $agreement->save();
++        Session::flash('flash_message', 'Agreement successfully added! ');
++
++        return view('home');
+ 	}
+ 
+ 	/**
+Index: app/Http/Requests/StoreAgreementPostRequest.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Requests/StoreAgreementPostRequest.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
++++ app/Http/Requests/StoreAgreementPostRequest.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -0,0 +1,30 @@
++<?php namespace App\Http\Requests;
++
++use App\Http\Requests\Request;
++
++class StoreAgreementPostRequest extends Request {
++
++	/**
++	 * Determine if the user is authorized to make this request.
++	 *
++	 * @return bool
++	 */
++	public function authorize()
++	{
++		return true;
++	}
++
++	/**
++	 * Get the validation rules that apply to the request.
++	 *
++	 * @return array
++	 */
++	public function rules()
++	{
++        //TODO: not able to add rules for validation
++		return [
++
++		];
++	}
++
++}
+Index: app/Http/Requests/StorePreAgreementPostRequest.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Requests/StorePreAgreementPostRequest.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
++++ app/Http/Requests/StorePreAgreementPostRequest.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -0,0 +1,30 @@
++<?php namespace App\Http\Requests;
++
++use App\Http\Requests\Request;
++
++class StorePreAgreementPostRequest extends Request {
++
++	/**
++	 * Determine if the user is authorized to make this request.
++	 *
++	 * @return bool
++	 */
++	public function authorize()
++	{
++		return true;
++	}
++
++	/**
++	 * Get the validation rules that apply to the request.
++	 *
++	 * @return array
++	 */
++	public function rules()
++	{
++		return [
++			'tenant'=>'required|max:100',
++            'owner'=>'required|max:100'
++		];
++	}
++
++}
+Index: app/Http/routes.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/routes.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/Http/routes.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -33,6 +33,24 @@
+     Route::get('client/{id}'            , 'ClientController@show');
+ 
+ });
++/**
++ * Client controller route protected by auth middleware
++ * for user protections only .
++ * the client controller functions:
++ * index,create,store,edit,update,show
++ *
++ * */
++Route::group(['middleware' => 'auth'], function () {
++    Route::get('agmnt'                , 'RentalAgreementController@index');
++    Route::get('agmnt/preCreate'      , 'RentalAgreementController@preCreate');
++    Route::put('agmnt/create'         , 'RentalAgreementController@create');
++    Route::post('agmnt/store'         , 'RentalAgreementController@store');
++    Route::get('agmnt/edit/{id}'      , 'RentalAgreementController@edit');
++    Route::post('agmnt/update/{id}'   , 'RentalAgreementController@update');
++    Route::get('agmnt/delete/{id}'    , 'RentalAgreementController@destroy');
++    Route::get('agmnt/{id}'           , 'RentalAgreementController@show');
++
++});
+ 
+ /**
+  * Bank Detail controller route protected by auth middleware
+Index: app/RentalAgreement.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/RentalAgreement.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ app/RentalAgreement.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,5 +1,6 @@
+ <?php namespace App;
+ 
++use Carbon\Carbon;
+ use Illuminate\Database\Eloquent\Model;
+ 
+ class RentalAgreement extends Model {
+@@ -14,6 +15,15 @@
+         ,'rentalAmount','rentalDeposit','utilitiesDeposit'
+         ,'otherDeposit','premiseUse'];
+ 
++    public function setexpireDatecommencingDateAttribute($date){
++        $this->attributes['expireDate']=Carbon::parse($date);
++    }
++    public function setdateOfAgreementAttribute($date){
++        $this->attributes['dateOfAgreement']=Carbon::parse($date);
++    }
++    public function setcommencingDateAttribute($date){
++        $this->attributes['commencingDate']=Carbon::parse($date);
++    }
+     /**
+      * Get the user that owns the RentalAgreement.
+      */
+Index: database/migrations/2015_07_03_111123_create_rental_agreements_table.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- database/migrations/2015_07_03_111123_create_rental_agreements_table.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ database/migrations/2015_07_03_111123_create_rental_agreements_table.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -19,13 +19,13 @@
+             $table->integer('owner_id');
+             $table->integer('property_id');
+             $table->integer('user_id');
+-            $table->date('dateOfAgreement');
+-            $table->date('commencingDate');
+-            $table->date('expireDate');
+-            $table->integer('rentalAmount');
+-            $table->integer('rentalDeposit');
+-            $table->integer('utilitiesDeposit');
+-            $table->integer('otherDeposit');
++            $table->timestamp('dateOfAgreement');
++            $table->timestamp('commencingDate');
++            $table->timestamp('expireDate');
++            $table->string('rentalAmount');
++            $table->string('rentalDeposit');
++            $table->string('utilitiesDeposit');
++            $table->string('otherDeposit');
+             $table->string('premiseUse');
+             $table->timestamps();
+ 		});
+Index: resources/views/agreement/addAgreement.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/agreement/addAgreement.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
++++ resources/views/agreement/addAgreement.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -0,0 +1,57 @@
++@extends('app')
++@section('content')
++	<h1>Add new Agreement</h1>
++
++	<hr/>
++
++	@if (count($errors) > 0)
++		<div class="alert alert-danger">
++			<ul>
++				@foreach ($errors->all() as $error)
++					<li>{{ $error }}</li>
++				@endforeach
++			</ul>
++		</div>
++	@endif
++
++
++	{!! Form::open(['action' => 'RentalAgreementController@store', 'method' => 'post']) !!}
++
++	{!! Form::label('property', 'Property Address', ['class' => 'control-label']) !!}
++	{!! Form::select('property_id', $adds ,null , ['class' => 'form-control']) !!}
++
++	{!! Form::label('dateOfAgreement', 'Date of Agreement', ['class' => 'control-label']) !!}
++	{!! Form::input('date', 'dateOfAgreement' , date('Y-m-d') , ['class' => 'form-control']) !!}
++
++	{!! Form::label('commencingDate', 'Commencing Date', ['class' => 'control-label']) !!}
++	{!! Form::input('commencingDate', 'date' , date('Y-m-d') , ['class' => 'form-control']) !!}
++
++	{!! Form::label('expireDate', 'expire Date', ['class' => 'control-label']) !!}
++	{!! Form::input('expireDate', 'date' , date('Y-m-d') , ['class' => 'form-control']) !!}
++
++	{!! Form::label('rentalAmount', 'rental Amount', ['class' => 'control-label']) !!}
++	{!! Form::text('rentalAmount' , null , ['class' => 'form-control']) !!}
++
++	{!! Form::label('rentalDeposit', 'rental Deposit Amount', ['class' => 'control-label']) !!}
++	{!! Form::text('rentalDeposit' , null , ['class' => 'form-control']) !!}
++
++	{!! Form::label('utilitiesDeposit', 'utilities Deposit Amount', ['class' => 'control-label']) !!}
++	{!! Form::text('utilitiesDeposit' , null , ['class' => 'form-control']) !!}
++
++	{!! Form::label('otherDeposit', 'other Deposit Amount', ['class' => 'control-label']) !!}
++	{!! Form::text('otherDeposit', null , ['class' => 'form-control']) !!}
++
++	{!! Form::label('premiseUse', 'premise Use ', ['class' => 'control-label']) !!}
++	{!! Form::text('premiseUse' , null , ['class' => 'form-control']) !!}
++
++
++	{!! Form::submit('Submit', ['class' => 'button']) !!}
++
++	{!! Form::close() !!}
++
++
++
++
++
++
++@endsection
+\ No newline at end of file
+Index: resources/views/agreement/addpreAgreement.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/agreement/addpreAgreement.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
++++ resources/views/agreement/addpreAgreement.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -0,0 +1,33 @@
++@extends('app')
++@section('content')
++	<h1>Choose Owner and Client </h1>
++
++	<hr/>
++
++	@if (count($errors) > 0)
++		<div class="alert alert-danger">
++			<ul>
++				@foreach ($errors->all() as $error)
++					<li>{{ $error }}</li>
++				@endforeach
++			</ul>
++		</div>
++	@endif
++
++	{!! Form::open(['action' => 'RentalAgreementController@create', 'method' => 'put']) !!}
++
++	{!! Form::label('tenant', 'Tenant', ['class' => 'control-label']) !!}
++	{!! Form::select('tenant', $clientList , null , ['class' => 'form-control']) !!}
++
++	{!! Form::label('owner', 'Owner', ['class' => 'control-label']) !!}
++	{!! Form::select('owner', $ownerList , null , ['class' => 'form-control']) !!}
++
++	{!! Form::submit('Submit', ['class' => 'form-control']) !!}
++
++
++	{!! Form::close() !!}
++
++
++
++
++@endsection
+\ No newline at end of file
+Index: resources/views/agreement/agreement.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/agreement/agreement.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
++++ resources/views/agreement/agreement.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -0,0 +1,23 @@
++@extends('app')
++@section('content')
++
++
++	@if(!$agreementList->isEmpty())
++		@foreach($agreementList as $agreement)
++
++			<ul>
++				{{$agreement->name}}
++				<p>{{ $agreement->idNumber}}</p>
++				<p>
++					<a href="{{ action('OwnerController@show', $agreement->id) }}" class="btn btn-info">View Agreement</a>
++					<a href="{{ action('OwnerController@edit', $agreement->id) }}" class="btn btn-primary">Edit Agreement</a>
++				</p>
++				<hr>
++			</ul>
++
++		@endforeach
++	@else
++		<h1> No Agreement added yet</h1>
++	@endif
++
++@endsection
+\ No newline at end of file
+Index: resources/views/app.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/app.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/app.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -50,8 +50,8 @@
+ 								<li><a href="{{url('client')}}">Client list</a></li>
+ 								<li><a href="{{url('owner/create')}}">Add Owner</a> </li>
+ 								<li><a href="{{url('owner')}}">Owner list</a></li>
+-								<li><a href="{{url('agreement/create')}}">Add Rental Agreement</a> </li>
+-								<li><a href="{{url('agreement')}}">Agreements list</a></li>
++								<li><a href="{{url('agmnt/preCreate')}}">Add Rental Agreement</a> </li>
++								<li><a href="{{url('agmnt')}}">Agreements list</a></li>
+ 							</ul>
+ 						</li>
+ 					@endif
+@@ -59,7 +59,12 @@
+ 			</div>
+ 		</div>
+ 	</nav>
++	@if(Session::has('flash_message'))
+ 
++		<div class="alert alert-success">
++			{{ Session::get('flash_message') }}
++		</div>
++	@endif
+ 	@yield('content')
+ 
+ 	<!-- Scripts -->
+Index: resources/views/addClient.blade.php
+===================================================================
+--- resources/views/addClient.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/client/addClient.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/clients.blade.php
+===================================================================
+--- resources/views/clients.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/client/clients.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/deleteClient.blade.php
+===================================================================
+--- resources/views/deleteClient.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/client/deleteClient.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/editClient.blade.php
+===================================================================
+--- resources/views/editClient.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/client/editClient.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/showClient.blade.php
+===================================================================
+--- resources/views/showClient.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/client/showClient.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/addAddress.blade.php
+===================================================================
+--- resources/views/addAddress.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/general/addAddress.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/addBankDetail.blade.php
+===================================================================
+--- resources/views/addBankDetail.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/general/addBankDetail.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/editAddress.blade.php
+===================================================================
+--- resources/views/editAddress.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/general/editAddress.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/editBankDetail.blade.php
+===================================================================
+--- resources/views/editBankDetail.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/general/editBankDetail.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/addOwner.blade.php
+===================================================================
+--- resources/views/addOwner.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/owner/addOwner.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/deleteOwner.blade.php
+===================================================================
+--- resources/views/deleteOwner.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/owner/deleteOwner.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/editOwner.blade.php
+===================================================================
+--- resources/views/editOwner.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/owner/editOwner.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/owners.blade.php
+===================================================================
+--- resources/views/owners.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/owner/owners.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/showOwner.blade.php
+===================================================================
+--- resources/views/showOwner.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/owner/showOwner.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/addProperty.blade.php
+===================================================================
+--- resources/views/addProperty.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/property/addProperty.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@
+Index: resources/views/editProperty.blade.php
+===================================================================
+--- resources/views/editProperty.blade.php	(revision 9bc4ee4903875d62613df04b5603f55e43354ee8)
++++ resources/views/property/editProperty.blade.php	(revision 210f3e57b5844d42cc6541945c12dc2eeac510a2)
+@@ -1,0 +1,0 @@

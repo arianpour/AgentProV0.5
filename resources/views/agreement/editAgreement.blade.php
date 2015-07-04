@@ -1,32 +1,33 @@
 @extends('app')
 @section('content')
-	<h1>Add new Agreement</h1>
-
-	<hr/>
-
-	@if (count($errors) > 0)
+	<h1>Editing Agreement</h1>
+	<p class="lead">Edit and save this Agreement below, or
+		<a href="{{ action('RentalAgreementController@index') }}">go back to all Agreement.</a></p>
+	<hr>
+	@if($errors->any())
 		<div class="alert alert-danger">
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
+			@foreach($errors->all() as $error)
+				<p>{{ $error }}</p>
+			@endforeach
 		</div>
 	@endif
-<!--TODO: have to work update with Ajax that able to update all information .-->
 
-	{!! Form::open(['action' => 'RentalAgreementController@update', 'method' => 'post']) !!}
+	{!! Form::model($agreement,
+	['action' => ['RentalAgreementController@update', $agreement->id],
+	'method' => 'post'])
+	!!}
 
-
+	{!! Form::label('property', 'Property Address', ['class' => 'control-label']) !!}
+	{!! Form::select('property_id', $adds ,null , ['class' => 'form-control']) !!}
 
 	{!! Form::label('dateOfAgreement', 'Date of Agreement', ['class' => 'control-label']) !!}
-	{!! Form::input('date', 'dateOfAgreement' , date('Y-m-d') , ['class' => 'form-control']) !!}
+	{!! Form::input('date', 'dateOfAgreement' , null , ['class' => 'form-control']) !!}
 
 	{!! Form::label('commencingDate', 'Commencing Date', ['class' => 'control-label']) !!}
-	{!! Form::input('commencingDate', 'date' , date('Y-m-d') , ['class' => 'form-control']) !!}
+	{!! Form::input('commencingDate', 'date' , null , ['class' => 'form-control']) !!}
 
 	{!! Form::label('expireDate', 'expire Date', ['class' => 'control-label']) !!}
-	{!! Form::input('expireDate', 'date' , date('Y-m-d') , ['class' => 'form-control']) !!}
+	{!! Form::input('expireDate', 'date' , null , ['class' => 'form-control']) !!}
 
 	{!! Form::label('rentalAmount', 'rental Amount', ['class' => 'control-label']) !!}
 	{!! Form::text('rentalAmount' , null , ['class' => 'form-control']) !!}
@@ -47,10 +48,6 @@
 	{!! Form::submit('Submit', ['class' => 'button']) !!}
 
 	{!! Form::close() !!}
-
-
-
-
 
 
 @endsection

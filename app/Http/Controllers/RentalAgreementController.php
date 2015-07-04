@@ -1,9 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Address;
 use App\Client;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAgreementPostRequest;
+use App\Http\Requests\StoreAgrPostRequest;
+use App\Property;
 use App\RentalAgreement;
 use Illuminate\Support\Facades\Input;
 use Session;
@@ -67,9 +70,8 @@ class RentalAgreementController extends Controller {
      * @param StoreAgreementPostRequest $request
      * @return Response
      */
-	public function store(StoreAgreementPostRequest $request)
+	public function store(Request $request)
 	{
-        //TODO: need to review the id's not working
         $agreement= new RentalAgreement(array(
 
             'client_id'         =>  Session::get('client_id'),
@@ -101,7 +103,12 @@ class RentalAgreementController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+
+        $agreement=RentalAgreement::find($id);
+        $address=Address::find($agreement->property_id);
+        $client=Client::find($agreement->client_id);
+        $owner=Client::find($agreement->owner_id);
+        return view('agreement.showAgreement',compact('agreement','address','client','owner'));
 	}
 
 	/**
@@ -112,7 +119,8 @@ class RentalAgreementController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $agreement=RentalAgreement::findOrFail($id);
+        return view('agreement.editAgreement',compact('agreement'));
 	}
 
 	/**
@@ -121,10 +129,13 @@ class RentalAgreementController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id,Request $request)
 	{
-		//
-	}
+        $agreement=RentalAgreement::findOrFail($id);
+        $input=$request->all();
+        $agreement->fill($input)->save();
+        Session::flash('flash_message', 'Agreement successfully Updated!');
+        return redirect()->back();	}
 
 	/**
 	 * Remove the specified resource from storage.
@@ -134,7 +145,11 @@ class RentalAgreementController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
-	}
+        $agreement = RentalAgreement::findOrFail($id);
+        $agreement->delete();
+
+        Session::flash('flash_message', 'Agreement successfully deleted!');
+
+        return redirect()->action('RentalAgreementController@index');	}
 
 }
