@@ -22,7 +22,7 @@ class ClientController extends Controller {
 
         $clientList=User::findOrFail(Auth::user()->id)->client->where('role','tenant');
 
-        return view('clients',compact('clientList'));
+        return view('client.clients',compact('clientList'));
     }
 
     /**
@@ -33,7 +33,7 @@ class ClientController extends Controller {
     public function create()
     {
 
-        return view('addClient');
+        return view('client.addClient');
     }
 
     /**
@@ -61,7 +61,7 @@ class ClientController extends Controller {
         Session::flash('flash_message', 'Client successfully added! Need to add the Address');
         Session::put('addressMessage', 'New Address for Tenant');
 
-        return redirect('address/create');
+        return redirect('general.address/create');
     }
 
     /**
@@ -75,7 +75,7 @@ class ClientController extends Controller {
 
         $client=Client::find($id);
         $address=$client->addresses()->get();
-        return view('showClient',compact('client','address'));
+        return view('client.showClient',compact('client','address'));
     }
 
     /**
@@ -87,7 +87,7 @@ class ClientController extends Controller {
     public function edit($id)
     {
         $client=Client::findOrFail($id);
-        return view('editClient',compact('client'));
+        return view('client.editClient',compact('client'));
 
     }
 

@@ -50,8 +50,8 @@
 								<li><a href="{{url('client')}}">Client list</a></li>
 								<li><a href="{{url('owner/create')}}">Add Owner</a> </li>
 								<li><a href="{{url('owner')}}">Owner list</a></li>
-								<li><a href="{{url('agreement/create')}}">Add Rental Agreement</a> </li>
-								<li><a href="{{url('agreement')}}">Agreements list</a></li>
+								<li><a href="{{url('agmnt/preCreate')}}">Add Rental Agreement</a> </li>
+								<li><a href="{{url('agmnt')}}">Agreements list</a></li>
 							</ul>
 						</li>
 					@endif
@@ -59,7 +59,12 @@
 			</div>
 		</div>
 	</nav>
+	@if(Session::has('flash_message'))
 
+		<div class="alert alert-success">
+			{{ Session::get('flash_message') }}
+		</div>
+	@endif
 	@yield('content')
 
 	<!-- Scripts -->

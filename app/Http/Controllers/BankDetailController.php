@@ -28,7 +28,7 @@ class BankDetailController extends Controller {
      */
     public function create()
     {
-        return view('addBankDetail');	}
+        return view('general.addBankDetail');	}
 
     /**
      * Store a newly created resource in storage.
@@ -75,7 +75,7 @@ class BankDetailController extends Controller {
 
         $bankDetailId=$client->bankdetails()->first()->id;
         $bankDetail=BankDetail::findOrFail($bankDetailId);
-        return view('editBankDetail',compact('bankDetail','client'));
+        return view('general.editBankDetail',compact('bankDetail','client'));
     }
 
     /**

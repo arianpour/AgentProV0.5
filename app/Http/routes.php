@@ -33,6 +33,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('client/{id}'            , 'ClientController@show');
 
 });
+/**
+ * Client controller route protected by auth middleware
+ * for user protections only .
+ * the client controller functions:
+ * index,create,store,edit,update,show
+ *
+ * */
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('agmnt'                , 'RentalAgreementController@index');
+    Route::get('agmnt/preCreate'      , 'RentalAgreementController@preCreate');
+    Route::put('agmnt/create'         , 'RentalAgreementController@create');
+    Route::post('agmnt/store'         , 'RentalAgreementController@store');
+    Route::get('agmnt/edit/{id}'      , 'RentalAgreementController@edit');
+    Route::post('agmnt/update/{id}'   , 'RentalAgreementController@update');
+    Route::get('agmnt/delete/{id}'    , 'RentalAgreementController@destroy');
+    Route::get('agmnt/{id}'           , 'RentalAgreementController@show');
+
+});
 
 /**
  * Bank Detail controller route protected by auth middleware

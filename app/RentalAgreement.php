@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class RentalAgreement extends Model {
@@ -14,6 +15,15 @@ class RentalAgreement extends Model {
         ,'rentalAmount','rentalDeposit','utilitiesDeposit'
         ,'otherDeposit','premiseUse'];
 
+    public function setexpireDatecommencingDateAttribute($date){
+        $this->attributes['expireDate']=Carbon::parse($date);
+    }
+    public function setdateOfAgreementAttribute($date){
+        $this->attributes['dateOfAgreement']=Carbon::parse($date);
+    }
+    public function setcommencingDateAttribute($date){
+        $this->attributes['commencingDate']=Carbon::parse($date);
+    }
     /**
      * Get the user that owns the RentalAgreement.
      */

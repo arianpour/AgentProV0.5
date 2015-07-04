@@ -29,7 +29,7 @@ class AddressController extends Controller {
      */
     public function create()
     {
-        return view('addAddress');
+        return view('general.addAddress');
     }
 
     /**
@@ -97,7 +97,7 @@ class AddressController extends Controller {
 
         $addressId=$client->addresses()->first()->id;
         $address=Address::findOrFail($addressId);
-        return view('editAddress',compact('address','client'));
+        return view('general.editAddress',compact('address','client'));
     }
 
     /**

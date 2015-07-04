@@ -20,7 +20,7 @@ class OwnerController extends Controller {
     {
         //TODO: change it to show the owner lists
         $clientList=User::findOrFail(Auth::user()->id)->client->where('role','owner');
-        return view('owners',compact('clientList'));
+        return view('owner.owners',compact('clientList'));
     }
 
     /**
@@ -30,7 +30,7 @@ class OwnerController extends Controller {
      */
     public function create()
     {
-        return view('addOwner');
+        return view('owner.addOwner');
     }
 
     /**
@@ -78,7 +78,7 @@ class OwnerController extends Controller {
 
 
 
-        return view('showOwner',compact('owner','address','bankDetails','property'));
+        return view('owner.showOwner',compact('owner','address','bankDetails','property'));
     }
 
     /**
@@ -90,7 +90,7 @@ class OwnerController extends Controller {
     public function edit($id)
     {
         $owner=Client::findOrFail($id);
-        return view('editOwner',compact('owner'));
+        return view('owner.editOwner',compact('owner'));
     }
 
     /**

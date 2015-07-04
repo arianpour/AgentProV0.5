@@ -18,7 +18,7 @@ class PropertyController extends Controller {
     {
         $propertyList=User::findOrFail(Auth::user()->id)->property;
 
-        return view('property',compact('propertyList'));
+        return view('property.property',compact('propertyList'));
     }
 
     /**
@@ -30,7 +30,7 @@ class PropertyController extends Controller {
     {
         $ownerList=User::findOrFail(Auth::user()->id)->client->where('role','owner');
 
-        return view('addProperty',compact('ownerList'));
+        return view('property.addProperty',compact('ownerList'));
     }
 
     /**
@@ -78,7 +78,7 @@ class PropertyController extends Controller {
         $address=Address::findOrFail($id);
         // $address=Address::findOrFail($address->id);
 
-        return view('editProperty',compact('address'));
+        return view('property.editProperty',compact('address'));
     }
 
     /**
