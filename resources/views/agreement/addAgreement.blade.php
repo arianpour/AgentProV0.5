@@ -13,12 +13,14 @@
 			</ul>
 		</div>
 	@endif
-<!--TODO: have to work update with Ajax that able to update all information .-->
-
-	{!! Form::open(['action' => 'RentalAgreementController@update', 'method' => 'post']) !!}
 
 
+	{!! Form::open(['action' => 'RentalAgreementController@store', 'method' => 'post']) !!}
 
+
+	{!! Form::label('property', 'Property', ['class' => 'control-label']) !!}
+	{!! Form::select('property_id', $adds , null , ['class' => 'form-control']) !!}
+	
 	{!! Form::label('dateOfAgreement', 'Date of Agreement', ['class' => 'control-label']) !!}
 	{!! Form::input('date', 'dateOfAgreement' , date('Y-m-d') , ['class' => 'form-control']) !!}
 
