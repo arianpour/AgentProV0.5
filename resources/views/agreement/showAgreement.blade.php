@@ -28,7 +28,7 @@
 		<p>email : {{$client->email}}</p>
 		<p>idNumber : {{$client->idNumber}}</p>
 		<p>phoneNo : {{$client->phoneNo}}</p>
-	<a href="{{ action('ClientController@edit', $client->id) }}" class="btn btn-primary">Edit Client Details</a>
+	<a href="{{ action('ClientController@edit', $client) }}" class="btn btn-primary">Edit Client Details</a>
 	<hr>
 	<p>Owner Details</p>
 		<p>name : {{$owner->name}}</p>

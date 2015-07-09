@@ -13,7 +13,7 @@
 	@endif
 
 	{!! Form::model($client,
-	['action' => ['ClientController@update', $client->id],
+	['action' => ['ClientController@update', $client],
 	'method' => 'post'])
 	!!}
 	{!! Form::label('name', 'Name', ['class' => 'control-label']) !!}

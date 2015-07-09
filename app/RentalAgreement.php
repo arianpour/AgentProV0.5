@@ -38,5 +38,15 @@ class RentalAgreement extends Model {
         return $this->belongsTo('App\Property');
     }
 
+    /**
+     * Get the value of the model's route key.
+     *
+     * @return mixed
+     */
+    public function getRouteKey()
+    {
+        $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+        return $hashids->encode($this->getKey());
+    }
 
 }

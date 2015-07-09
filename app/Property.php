@@ -20,5 +20,15 @@ class Property extends Model {
     public function rental_agreement(){
         return $this->hasMany('App\RentalAgreement');
     }
+    /**
+     * Get the value of the model's route key.
+     *
+     * @return mixed
+     */
+    public function getRouteKey()
+    {
+        $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+        return $hashids->encode($this->getKey());
+    }
 
 }

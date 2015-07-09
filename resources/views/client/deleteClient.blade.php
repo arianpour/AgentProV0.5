@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<a href="{{ action('ClientController@index') }}" class="btn btn-info">Back to all Clients</a>
-			<a href="{{ action('ClientController@edit', $client->id) }}" class="btn btn-primary">Edit client</a>
+			<a href="{{ action('ClientController@edit', $client) }}" class="btn btn-primary">Edit client</a>
 		</div>
 		<div class="col-md-6 text-right">
 			{!! Form::open([

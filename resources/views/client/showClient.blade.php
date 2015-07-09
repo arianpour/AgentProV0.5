@@ -18,9 +18,9 @@
 	@endforeach
 
 	<a href="{{ action('ClientController@index') }}" class="btn btn-info">Back to all Tenant</a>
-	<a href="{{ action('ClientController@edit', $client->id) }}" class="btn btn-primary">Edit Tenant Details</a>
-	<a href="{{ action('AddressController@edit', $client->id) }}" class="btn btn-primary">Edit Address</a>
+	<a href="{{ action('ClientController@edit', $client) }}" class="btn btn-primary">Edit Tenant Details</a>
+	<a href="{{ action('AddressController@edit', $client) }}" class="btn btn-primary">Edit Address</a>
 	<div class="pull-right">
-		<a href="{{action('ClientController@destroy',$client->id)}}" class="btn btn-danger">Delete this Tenant</a>
+		<a href="{{action('ClientController@destroy',$client)}}" class="btn btn-danger">Delete this Tenant</a>
 	</div>
 @endsection

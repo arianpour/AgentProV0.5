@@ -1,5 +1,8 @@
 <?php namespace App\Providers;
 
+use App\Client;
+use Hashids\Hashids;
+use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -25,6 +28,15 @@ class RouteServiceProvider extends ServiceProvider {
 		//
 		
 		parent::boot($router);
+        $router->bind('client', function($value,$route)
+        {
+            $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+
+            $id= $hashids->decode($value)[0];
+            return Client::findOrFail($id);
+        });
+
+
 	}
 
 	/**

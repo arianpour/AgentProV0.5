@@ -9,8 +9,11 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ClientController extends Controller {
+
+
 
     /**
      * Display a listing of the resource.
@@ -21,7 +24,6 @@ class ClientController extends Controller {
     {
 
         $clientList=User::findOrFail(Auth::user()->id)->client->where('role','tenant');
-
         return view('client.clients',compact('clientList'));
     }
 
@@ -67,13 +69,12 @@ class ClientController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Client $client
      * @return Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show(Client $client)
     {
-
-        $client=Client::find($id);
         $address=$client->addresses()->get();
         return view('client.showClient',compact('client','address'));
     }
@@ -84,9 +85,9 @@ class ClientController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client=Client::findOrFail($id);
+
         return view('client.editClient',compact('client'));
 
     }
@@ -98,9 +99,8 @@ class ClientController extends Controller {
      * @param StoreaddClientPostRequest $request
      * @return Response
      */
-    public function update($id,StoreaddClientPostRequest $request)
+    public function update(Client $client,StoreaddClientPostRequest $request)
     {
-        $client=Client::findOrFail($id);
         $input=$request->all();
         $client->fill($input)->save();
         Session::flash('flash_message', 'Client successfully Updated!');
@@ -113,10 +113,8 @@ class ClientController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        $client = Client::findOrFail($id);
-
         $client->addresses()->delete();
         $client->delete();
 

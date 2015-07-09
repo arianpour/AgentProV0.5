@@ -15,7 +15,8 @@
 	@endif
 
 
-	{!! Form::open(['action' => 'ClientController@store', 'method' => 'post']) !!}
+	{!! Form::open(['action' => 'ClientController@store',
+	'method' => 'post']) !!}
 	{!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
 	{!! Form::text('name', '', ['class' => 'field']) !!}
 

@@ -27,10 +27,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('client'                 , 'ClientController@index');
     Route::get('client/create'          , 'ClientController@create');
     Route::post('client/store'          , 'ClientController@store');
-    Route::get('client/edit/{id}'       , 'ClientController@edit');
-    Route::post('client/update/{id}'    , 'ClientController@update');
-    Route::get('client/delete/{id}'     , 'ClientController@destroy');
-    Route::get('client/{id}'            , 'ClientController@show');
+    Route::get('client/edit/{client}'       , 'ClientController@edit');
+    Route::post('client/update/{client}'    , 'ClientController@update');
+    Route::get('client/delete/{client}'     , 'ClientController@destroy');
+    Route::get('client/{client}'            , 'ClientController@show');
 
 });
 /**
