@@ -1,6 +1,10 @@
 <?php namespace App\Providers;
 
+use App\Address;
+use App\BankDetail;
 use App\Client;
+use App\Property;
+use App\RentalAgreement;
 use Hashids\Hashids;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
@@ -31,12 +35,34 @@ class RouteServiceProvider extends ServiceProvider {
         $router->bind('client', function($value,$route)
         {
             $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
-
             $id= $hashids->decode($value)[0];
             return Client::findOrFail($id);
         });
+        $router->bind('bank', function($value,$route)
+        {
+            $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+            $id= $hashids->decode($value)[0];
+            return BankDetail::findOrFail($id);
+        });
 
-
+        $router->bind('address', function($value,$route)
+        {
+            $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+            $id= $hashids->decode($value)[0];
+            return Address::findOrFail($id);
+        });
+        $router->bind('property', function($value,$route)
+        {
+            $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+            $id= $hashids->decode($value)[0];
+            return Property::findOrFail($id);
+        });
+        $router->bind('agreement', function($value,$route)
+        {
+            $hashids = new Hashids('MySecretSalt*(&^%$eo&*^%&r',20);
+            $id= $hashids->decode($value)[0];
+            return RentalAgreement::findOrFail($id);
+        });
 	}
 
 	/**

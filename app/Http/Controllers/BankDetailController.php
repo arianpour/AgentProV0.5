@@ -69,13 +69,11 @@ class BankDetailController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client=Client::findOrFail($id);
-
         $bankDetailId=$client->bankdetails()->first()->id;
-        $bankDetail=BankDetail::findOrFail($bankDetailId);
-        return view('general.editBankDetail',compact('bankDetail','client'));
+        $bank=BankDetail::findOrFail($bankDetailId);
+        return view('general.editBankDetail',compact('bank','client'));
     }
 
     /**
@@ -85,11 +83,10 @@ class BankDetailController extends Controller {
      * @param StoreBankDetailPostRequest $request
      * @return Response
      */
-    public function update($id,StoreBankDetailPostRequest $request)
+    public function update(BankDetail $bank,StoreBankDetailPostRequest $request)
     {
-        $bankdetail=BankDetail::findOrFail($id);
         $input=$request->all();
-        $bankdetail->fill($input)->save();
+        $bank->fill($input)->save();
         Session::flash('flash_message', 'Bank Details successfully Updated!');
         return redirect()->back();
     }

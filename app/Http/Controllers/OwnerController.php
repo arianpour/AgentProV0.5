@@ -65,20 +65,16 @@ class OwnerController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
         $property=array();
-        $owner=Client::find($id);
-        $address=$owner->addresses()->get();
-        $bankDetails=$owner->bankDetails()->get();
-        $propertyd=$owner->property()->get();
+        $address=$client->addresses()->get();
+        $bankDetails=$client->bankDetails()->get();
+        $propertyd=$client->property()->get();
         foreach($propertyd as $item){
             array_push($property, $item->addresses()->get());
         }
-
-
-
-        return view('owner.showOwner',compact('owner','address','bankDetails','property'));
+        return view('owner.showOwner',compact('client','address','bankDetails','property'));
     }
 
     /**
@@ -87,10 +83,10 @@ class OwnerController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $owner=Client::findOrFail($id);
-        return view('owner.editOwner',compact('owner'));
+
+        return view('owner.editOwner',compact('client'));
     }
 
     /**
@@ -100,11 +96,11 @@ class OwnerController extends Controller {
      * @param StoreaddClientPostRequest $request
      * @return Response
      */
-    public function update($id,StoreaddClientPostRequest $request)
+    public function update(Client $client,StoreaddClientPostRequest $request)
     {
-        $owner=Client::findOrFail($id);
+
         $input=$request->all();
-        $owner->fill($input)->save();
+        $client->fill($input)->save();
         Session::flash('flash_message', 'Owner successfully Updated!');
         Session::put('addressMessage', 'Update Owner Details');
 
@@ -114,20 +110,21 @@ class OwnerController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Client $client
      * @return Response
+     * @throws \Exception
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Client $client)
     {
-        $owner = Client::findOrFail($id);
-        $owner->addresses()->delete();
-        $owner->bankDetails()->delete();
-        $propertyd=$owner->property()->get();
+        $client->addresses()->delete();
+        $client->bankDetails()->delete();
+        $propertyd=$client->property()->get();
         foreach($propertyd as $item){
             $item->addresses()->delete();
         }
-        $owner->property()->delete();
-        $owner->delete();
+        $client->property()->delete();
+        $client->delete();
         Session::flash('flash_message', 'Owner successfully deleted!');
         return redirect()->action('OwnerController@index');
 

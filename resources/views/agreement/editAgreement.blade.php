@@ -13,7 +13,7 @@
 	@endif
 
 	{!! Form::model($agreement,
-	['action' => ['RentalAgreementController@update', $agreement->id],
+	['action' => ['RentalAgreementController@update', $agreement],
 	'method' => 'post'])
 	!!}
 

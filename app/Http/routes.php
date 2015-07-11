@@ -45,10 +45,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('agmnt/preCreate'      , 'RentalAgreementController@preCreate');
     Route::put('agmnt/create'         , 'RentalAgreementController@create');
     Route::post('agmnt/store'         , 'RentalAgreementController@store');
-    Route::get('agmnt/edit/{id}'      , 'RentalAgreementController@edit');
-    Route::post('agmnt/update/{id}'   , 'RentalAgreementController@update');
-    Route::get('agmnt/delete/{id}'    , 'RentalAgreementController@destroy');
-    Route::get('agmnt/{id}'           , 'RentalAgreementController@show');
+    Route::get('agmnt/edit/{agreement}'      , 'RentalAgreementController@edit');
+    Route::post('agmnt/update/{agreement}'   , 'RentalAgreementController@update');
+    Route::get('agmnt/delete/{agreement}'    , 'RentalAgreementController@destroy');
+    Route::get('agmnt/{agreement}'           , 'RentalAgreementController@show');
 
 });
 
@@ -63,10 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('bankDetail'                 , 'BankDetailController@index');
     Route::get('bankDetail/create'          , 'BankDetailController@create');
     Route::post('bankDetail/store'          , 'BankDetailController@store');
-    Route::get('bankDetail/edit/{id}'       , 'BankDetailController@edit');
-    Route::post('bankDetail/update/{id}'    , 'BankDetailController@update');
-    Route::get('bankDetail/delete/{id}'     , 'BankDetailController@destroy');
-    Route::get('bankDetail/{id}'            , 'BankDetailController@show');
+    Route::get('bankDetail/edit/{client}'       , 'BankDetailController@edit');
+    Route::post('bankDetail/update/{bank}'    , 'BankDetailController@update');
+
 
 });
 /**
@@ -81,11 +80,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('owner'              , 'OwnerController@index');
     Route::get('owner/create'       , 'OwnerController@create');
     Route::post('owner/store'   , 'OwnerController@store');
-    Route::get('owner/edit/{id}'     , 'OwnerController@edit');
-    Route::post('owner/update/{id}'  , 'OwnerController@update');
-    Route::get('owner/delete/{id}', 'OwnerController@destroy');
-    Route::get('owner/getbank/{id}','RentalAgreementController@OwnerBank');
-    Route::get('owner/{id}'     , 'OwnerController@show');
+    Route::get('owner/edit/{client}'     , 'OwnerController@edit');
+    Route::post('owner/update/{client}'  , 'OwnerController@update');
+    Route::get('owner/delete/{client}', 'OwnerController@destroy');
+    Route::get('owner/getbank/{client}','RentalAgreementController@OwnerBank');
+    Route::get('owner/{client}'     , 'OwnerController@show');
 
 });
 
@@ -100,11 +99,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('property'           , 'PropertyController@index');
     Route::get('property/create'    , 'PropertyController@create');
-    Route::get('property/store/{id}', 'PropertyController@store');
-    Route::get('property/edit/{id}' , 'PropertyController@edit');
-    Route::post('property/update/{id}'   , 'PropertyController@update');
-    Route::get('property/destroy/{id}'   , 'PropertyController@destroy');
-    Route::get('property/{id}'      , 'PropertyController@show');
+    Route::get('property/store/{property}', 'PropertyController@store');
+    Route::get('property/edit/{address}' , 'PropertyController@edit');
+    Route::get('property/destroy/{address}' , 'PropertyController@destroy');
 
 });
 
@@ -119,10 +116,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('address'                , 'AddressController@index');
     Route::get('address/create'         , 'AddressController@create');
     Route::post('address/store'         , 'AddressController@store');
-    Route::get('address/edit/{id}'      , 'AddressController@edit');
-    Route::post('address/update/{id}'   , 'AddressController@update');
-    Route::get('address/destroy/{id}'   , 'AddressController@destroy');
-    Route::get('address/{id}'           , 'AddressController@show');
+    Route::get('address/edit/{client}'      , 'AddressController@edit');
+    Route::post('address/update/{address}'   , 'AddressController@update');
+    Route::get('address/destroy/{address}'   , 'AddressController@destroy');
+    Route::get('address/{address}'           , 'AddressController@show');
 
 });
 

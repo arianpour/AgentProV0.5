@@ -1,7 +1,9 @@
 @extends('app')
 @section('content')
-	<h1>Editing " {{ $owner->name }} "</h1>
-	<p class="lead">Edit and save this Client below, or <a href="{{ action('OwnerController@index') }}">go back to all owner.</a></p>
+	<h1>Editing " {{ $client->name }} "</h1>
+	<p class="lead">Edit and save this Client below, or
+		<a href="{{ action('OwnerController@index') }}">
+			go back to all owner.</a></p>
 	<hr>
 	@if($errors->any())
 		<div class="alert alert-danger">
@@ -11,8 +13,8 @@
 		</div>
 	@endif
 
-	{!! Form::model($owner,
-	['action' => ['OwnerController@update', $owner->id],
+	{!! Form::model($client,
+	['action' => ['OwnerController@update', $client],
 	'method' => 'post'])
 	!!}
 	{!! Form::label('name', 'Name', ['class' => 'control-label']) !!}

@@ -1,7 +1,11 @@
 <?php namespace App;
 
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed addressable_id
+ */
 class Address extends Model {
 
     /**

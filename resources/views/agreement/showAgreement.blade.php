@@ -9,7 +9,7 @@
 		<p>State: {{$address->state}}</p>
 		<p>post Code: {{$address->postCode}}</p>
 		<p>Country: {{$address->country}}</p>
-	<a href="{{ action('AddressController@edit', $address->id) }}" class="btn btn-primary">Edit property Details</a>
+	<a href="{{ action('AddressController@edit', $address) }}" class="btn btn-primary">Edit property Details</a>
 		<hr>
 	<p>Financial Particulars</p>
 		<p>date Of Agreement: {{date("d M Y",strtotime($agreement->dateOfAgreement))}}</p>
@@ -20,7 +20,7 @@
 		<p>utilities Deposit : {{$agreement->utilitiesDeposit}}</p>
 		<p>other Deposit : {{$agreement->otherDeposit}}</p>
 		<p>premise Use : {{$agreement->premiseUse}}</p>
-	<a href="{{ action('RentalAgreementController@edit', $agreement->id) }}" class="btn btn-primary">Edit Rental Agreement Details</a>
+	<a href="{{ action('RentalAgreementController@edit', $agreement) }}" class="btn btn-primary">Edit Rental Agreement Details</a>
 	<hr>
 	<p>Tenant Details</p>
 		<p>name : {{$client->name}}</p>
@@ -36,13 +36,13 @@
 		<p>email : {{$owner->email}}</p>
 		<p>idNumber : {{$owner->idNumber}}</p>
 		<p>phoneNo : {{$owner->phoneNo}}</p>
-	<a href="{{ action('OwnerController@edit', $owner->id) }}" class="btn btn-primary">Edit Owner Details</a>
+	<a href="{{ action('OwnerController@edit', $client) }}" class="btn btn-primary">Edit Owner Details</a>
 	<hr>
 
 
 	<a href="{{ action('RentalAgreementController@index') }}" class="btn btn-info">Back to all Rental Agreement</a>
 
 	<div class="pull-right">
-		<a href="{{action('RentalAgreementController@destroy',$agreement->id)}}" class="btn btn-danger">Delete this Rental Agreement</a>
+		<a href="{{action('RentalAgreementController@destroy',$agreement)}}" class="btn btn-danger">Delete this Rental Agreement</a>
 	</div>
 @endsection

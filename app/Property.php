@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model {

@@ -91,10 +91,8 @@ class AddressController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        $client=Client::findOrFail($id);
-
         $addressId=$client->addresses()->first()->id;
         $address=Address::findOrFail($addressId);
         return view('general.editAddress',compact('address','client'));
@@ -107,9 +105,8 @@ class AddressController extends Controller {
      * @param StoreAddressPostRequest $request
      * @return Response
      */
-    public function update($id,StoreAddressPostRequest $request)
+    public function update(Address $address,StoreAddressPostRequest $request)
     {
-        $address=Address::findOrFail($id);
         $input=$request->all();
         $address->fill($input)->save();
         Session::flash('flash_message', 'Address successfully Updated!');
@@ -123,12 +120,9 @@ class AddressController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Address $address)
     {
-        $address = Address::findOrFail($id);
-
         $address->delete();
-
         Session::flash('flash_message', 'Address successfully deleted!');
 
         return redirect()->action('ClientController@index');

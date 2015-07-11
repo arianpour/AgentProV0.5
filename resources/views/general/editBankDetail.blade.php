@@ -12,8 +12,8 @@
 		</div>
 	@endif
 
-	{!! Form::model($bankDetail,
-	['action' => ['BankDetailController@update', $bankDetail->id],
+	{!! Form::model($bank,
+	['action' => ['BankDetailController@update', $bank],
 	'method' => 'post'])
 	!!}
 	{!! Form::label('bankName', 'Bank Name', ['class' => 'control-label']) !!}

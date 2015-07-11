@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Carbon\Carbon;
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class RentalAgreement extends Model {

@@ -13,7 +13,9 @@
 			</ul>
 		</div>
 	@endif
-	{!! Form::open(['action' => 'AddressController@store', 'method' => 'post']) !!}{!! Form::label('unit', 'unit', ['class' => 'control-label']) !!}
+	{!! Form::open(['action' => 'AddressController@store', 'method' => 'post']) !!}
+
+	{!! Form::label('unit', 'unit', ['class' => 'control-label']) !!}
 
 	{!! Form::text('unit', '', ['class' => 'field']) !!}
 	{!! Form::label('street', 'street', ['class' => 'control-label']) !!}

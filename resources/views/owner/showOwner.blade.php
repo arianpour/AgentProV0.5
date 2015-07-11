@@ -1,11 +1,11 @@
 @extends('app')
 @section('content')
-	<h1>{{ $owner->name }} </h1>
+	<h1>{{ $client->name }} </h1>
 
-	<p>IC / Passport No: {{ $owner->idNumber }} </p>
-	<p>Email: {{ $owner->email }} </p>
-	<p>Nationality: {{ $owner->nationality }} </p>
-	<p>Phone No: {{ $owner->phoneNo }} </p>
+	<p>IC / Passport No: {{ $client->idNumber }} </p>
+	<p>Email: {{ $client->email }} </p>
+	<p>Nationality: {{ $client->nationality }} </p>
+	<p>Phone No: {{ $client->phoneNo }} </p>
 	@foreach($address as $item)
 
 		<p>Unit: {{$item->unit}}</p>
@@ -51,12 +51,12 @@
 	@endif
 
 	<a href="{{ action('OwnerController@index') }}" class="btn btn-info">Back to all Owner</a>
-	<a href="{{ action('OwnerController@edit', $owner->id) }}" class="btn btn-primary">Edit Owner Details</a>
-	<a href="{{ action('AddressController@edit', $owner->id) }}" class="btn btn-primary">Edit Address</a>
-	<a href="{{ action('BankDetailController@edit', $owner->id) }}" class="btn btn-primary">Edit Bank Details</a>
-	<a href="{{ action('PropertyController@store', $owner->id) }}" class="btn btn-primary">Add Property</a>
+	<a href="{{ action('OwnerController@edit', $client) }}" class="btn btn-primary">Edit Owner Details</a>
+	<a href="{{ action('AddressController@edit', $client) }}" class="btn btn-primary">Edit Address</a>
+	<a href="{{ action('BankDetailController@edit', $client) }}" class="btn btn-primary">Edit Bank Details</a>
+	<a href="{{ action('PropertyController@store', $client) }}" class="btn btn-primary">Add Property</a>
 
 	<div class="pull-right">
-		<a href="{{action('OwnerController@destroy',$owner->id)}}" class="btn btn-danger">Delete this Owner</a>
+		<a href="{{action('OwnerController@destroy',$client)}}" class="btn btn-danger">Delete this Owner</a>
 	</div>
 @endsection

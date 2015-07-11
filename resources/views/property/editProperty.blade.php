@@ -14,7 +14,7 @@
 		</div>
 	@endif
 	{!! Form::model($address,
-	['action' => ['AddressController@update', $address->id],
+	['action' => ['AddressController@update', $address],
 	'method' => 'post'])
 	!!}
 

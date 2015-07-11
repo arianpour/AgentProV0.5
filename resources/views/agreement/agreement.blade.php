@@ -9,8 +9,8 @@
 				{{$agreement->name}}
 				<p>{{ $agreement->idNumber}}</p>
 				<p>
-					<a href="{{ action('RentalAgreementController@show', $agreement->id) }}" class="btn btn-info">View Agreement</a>
-					<a href="{{ action('RentalAgreementController@edit', $agreement->id) }}" class="btn btn-primary">Edit Agreement</a>
+					<a href="{{ action('RentalAgreementController@show', $agreement) }}" class="btn btn-info">View Agreement</a>
+					<a href="{{ action('RentalAgreementController@edit', $agreement) }}" class="btn btn-primary">Edit Agreement</a>
 				</p>
 				<hr>
 			</ul>

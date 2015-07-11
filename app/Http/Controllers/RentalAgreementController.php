@@ -8,6 +8,7 @@ use App\Http\Requests\StoreAgreementPostRequest;
 use App\Http\Requests\StoreAgrPostRequest;
 use App\Property;
 use App\RentalAgreement;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Session;
 
@@ -47,9 +48,8 @@ class RentalAgreementController extends Controller {
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @param StorePreAgreementPostRequest $request
      * @return Response
+     * @internal param StorePreAgreementPostRequest $request
      */
     public function create(){
 
@@ -67,7 +67,7 @@ class RentalAgreementController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreAgreementPostRequest $request
+     * @param StoreAgreementPostRequest|Request $request
      * @return Response
      */
 	public function store(Request $request)
@@ -95,59 +95,59 @@ class RentalAgreementController extends Controller {
         return view('home');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-
-        $agreement=RentalAgreement::find($id);
+    /**
+     * Display the specified resource.
+     *
+     * @param RentalAgreement $agreement
+     * @return Response
+     * @internal param int $id
+     */
+	public function show(RentalAgreement $agreement)
+    {
         $address=Address::find($agreement->property_id);
         $client=Client::find($agreement->client_id);
         $owner=Client::find($agreement->owner_id);
         return view('agreement.showAgreement',compact('agreement','address','client','owner'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param RentalAgreement $agreement
+     * @return Response
+     * @internal param int $id
+     */
+	public function edit(RentalAgreement $agreement)
 	{
-        $agreement=RentalAgreement::findOrFail($id);
         return view('agreement.editAgreement',compact('agreement'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id,Request $request)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param RentalAgreement $agreement
+     * @param Request $request
+     * @return Response
+     * @internal param int $id
+     */
+	public function update(RentalAgreement $agreement,Request $request)
 	{
-        $agreement=RentalAgreement::findOrFail($id);
         $input=$request->all();
         $agreement->fill($input)->save();
         Session::flash('flash_message', 'Agreement successfully Updated!');
         return redirect()->back();	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param RentalAgreement $agreement
+     * @return Response
+     * @throws \Exception
+     * @internal param int $id
+     */
+	public function destroy(RentalAgreement $agreement)
 	{
-        $agreement = RentalAgreement::findOrFail($id);
         $agreement->delete();
-
         Session::flash('flash_message', 'Agreement successfully deleted!');
 
         return redirect()->action('RentalAgreementController@index');	}

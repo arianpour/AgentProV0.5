@@ -35,20 +35,22 @@ class PropertyController extends Controller {
 
     /**
      * Store a newly created resource in storage.
-     * @param $id
+     * @param Property $property
      * @return Response
+     * @internal param $id
      * @internal param StoreAddressPostRequest $request
      */
-    public function store($id)
+    public function store(Property $property)
     {
-        $property= new Property(array(
 
-            'client_id'=> $id
+        $propertyadd= new Property(array(
+
+            'client_id'=> $property->id
         ));
 
-        $property->save();
+        $propertyadd->save();
         Session::put('AddRole', 'property');
-        Session::put('PropertyInsertedId', $property->id);
+        Session::put('PropertyInsertedId', $propertyadd->id);
         Session::flash('flash_message', 'Add Property Address! ');
         Session::put('addressMessage', 'New Address for property');
 
@@ -70,14 +72,12 @@ class PropertyController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Address $address
      * @return Response
+     * @internal param int $id
      */
-    public function edit($id)
+    public function edit(Address $address)
     {
-        $address=Address::findOrFail($id);
-        // $address=Address::findOrFail($address->id);
-
         return view('property.editProperty',compact('address'));
     }
 
@@ -95,12 +95,13 @@ class PropertyController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Address $address
      * @return Response
+     * @throws \Exception
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Address $address)
     {
-        $address=Address::find($id);
         $property=Property::find($address->addressable_id);
         $property->delete();
 
